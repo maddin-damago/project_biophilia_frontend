@@ -44,8 +44,8 @@ export default function UserInput() {
   };
 
   return (
-    <div className="max-w-md p-6 my-4 mx-auto bg-white border rounded-xl shadow-xs border-stone-200">
-      <h2 className="mb-4 font-nature text-2xl text-emerald-900">Biophilic Assessment</h2>
+    <div className="max-w-md p-6 my-4 mx-auto bg-slate-50 border rounded-xl shadow-xs border-stone-200">
+      <h2 className="mb-4 font-nature-light font-bold text-2xl text-emerald-900">Biophilic Assessment</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -90,8 +90,8 @@ export default function UserInput() {
         <button
           type="submit"
           className={`w-full px-4 py-2 mt-4 text-white font-medium transition-colors rounded-lg
-            ${!formData.age || !formData.energy_level ? "bg-gray-300" : "bg-emerald-700"} hover:bg-emerald-800
-            focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2`}
+            ${!formData.age || !formData.energy_level ? "bg-gray-300" : "bg-emerald-700"} focus:outline-none
+            focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2`}
           disabled={!formData.age || !formData.energy_level}
         >
           {loading ? "Calculating..." : "Get Advice"}
