@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import WeatherWidget from "../components/WeatherWidget";
 import { getLatestUserMood, type UserFormData } from "../api/userData";
 
+import loadingSpinner from "../../public/loading.gif";
+
 export default function Results() {
   const [resultData, setResultData] = useState<UserFormData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -27,9 +29,9 @@ export default function Results() {
 
   if (loading) {
     return (
-      <div className="bg-white p-6 rounded shadow max-w-md mx-auto text-center">
+      <div className="w-1/3 p-6 rounded shadow max-w-md mx-auto text-center">
         <p className="text-gray-600 font-medium">
-          Fetching your results from Python RAM...
+          <img src={loadingSpinner} alt="loading..." className="w-10 m-auto" />
         </p>
       </div>
     );
@@ -48,7 +50,11 @@ export default function Results() {
     <div className="grid">
       <div className="w-1/3 mx-auto">
         <h2 className="text-2xl font-bold text-green-800 mb-4">
-          Your <span className="font-nature">BioPhiliaFlow</span> Results
+          Your{" "}
+          <span className="font-nature text-shadow-[0_2px_3px_rgba(0,0,0,0.2)]">
+            BioPhiliaFlow
+          </span>{" "}
+          Results
         </h2>
 
         <div className="border-t border-b py-4 my-4 space-y-2 text-left">
