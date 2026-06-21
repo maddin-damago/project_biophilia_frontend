@@ -9,13 +9,14 @@
 }
 
 @font-face {
-  font-family: "Fraunces";
-  src: url("/fonts/Fraunces144pt-Black.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
+  font-family: "Fraunces-Light";
+  src: url("/fonts/Fraunces144pt-Light.woff2") format("woff2");
+  font-weight: 400;
+  font-style: bold;
   font-display: swap;
 }
 
 @theme {
   --font-nature: "Fraunces", serif;
+  --font-nature-light: "Fraunces-Light", serif;
 }
