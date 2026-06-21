@@ -10,9 +10,7 @@ export default function UserInput() {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -47,16 +45,11 @@ export default function UserInput() {
 
   return (
     <div className="max-w-md p-6 my-4 mx-auto bg-white border rounded-xl shadow-xs border-stone-200">
-      <h2 className="mb-4 font-nature text-2xl text-emerald-900">
-        Biophilic Assessment
-      </h2>
+      <h2 className="mb-4 font-nature text-2xl text-emerald-900">Biophilic Assessment</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label
-            htmlFor="age"
-            className="block text-sm font-medium text-stone-700 mb-1"
-          >
+          <label htmlFor="age" className="block text-sm font-medium text-stone-700 mb-1">
             Age
           </label>
           <input
@@ -68,15 +61,13 @@ export default function UserInput() {
             value={formData.age}
             onChange={handleChange}
             placeholder="e.g., 28"
-            className="w-full px-3 py-2 border rounded-lg bg-stone-50 border-stone-300 text-stone-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
+            className="w-full px-3 py-2 border rounded-lg bg-stone-50 border-stone-300 text-stone-900 focus:outline-none
+              focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
           />
         </div>
 
         <div>
-          <label
-            htmlFor="energy_level"
-            className="block text-sm font-medium text-stone-700 mb-1"
-          >
+          <label htmlFor="energy_level" className="block text-sm font-medium text-stone-700 mb-1">
             Current Mood
           </label>
           <select
@@ -84,7 +75,8 @@ export default function UserInput() {
             name="energy_level"
             value={formData.energy_level}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg bg-stone-50 border-stone-300 text-stone-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
+            className="w-full px-3 py-2 border rounded-lg bg-stone-50 border-stone-300 text-stone-900 focus:outline-none
+              focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
           >
             <option value="" disabled>
               Select your energy level...
@@ -97,7 +89,10 @@ export default function UserInput() {
 
         <button
           type="submit"
-          className="w-full px-4 py-2 text-white font-medium transition-colors rounded-lg bg-emerald-700 hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
+          className={`w-full px-4 py-2 mt-4 text-white font-medium transition-colors rounded-lg
+            ${!formData.age || !formData.energy_level ? "bg-gray-300" : "bg-emerald-700"} hover:bg-emerald-800
+            focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2`}
+          disabled={!formData.age || !formData.energy_level}
         >
           {loading ? "Calculating..." : "Get Advice"}
         </button>

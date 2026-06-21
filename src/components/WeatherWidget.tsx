@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
-import { getWeatherMoodIndex, type MoodIndexResponse } from "../api/weather";
+import { useEffect, useState } from 'react';
+import {
+  getWeatherMoodIndex,
+  type MoodIndexResponse,
+} from '../api/weather';
+import loadingSpinner from '../../public/loading.gif';
 
 export default function WeatherWidget() {
-  const [data, setData] = useState<MoodIndexResponse | null>(null);
+  const [data, setData] =
+    useState<MoodIndexResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -11,13 +16,26 @@ export default function WeatherWidget() {
       .catch((err) => setError(err.message));
   }, []);
 
-  if (error) return <div className="text-red-500">Error: {error}</div>;
-  if (!data) return <div>Loading biophilia data...</div>;
+  if (error)
+    return (
+      <div className="text-red-500">Error: {error}</div>
+    );
+  if (!data)
+    return (
+      <div className="w-1/3 m-auto">
+        <img
+          src={loadingSpinner}
+          alt="loading..."
+          className="w-10 m-auto"
+        />
+      </div>
+    );
 
   return (
     <div className="w-1/3 p-4 bg-yellow-200 italic rounded shadow my-4 mx-auto">
       <h3>
-        <b>BioPhiliaFlow Mood Score</b>: {data.biophilia_mood_index}
+        <b>BioPhiliaFlow Mood Score</b>:{' '}
+        {data.biophilia_mood_index}
       </h3>
     </div>
   );
