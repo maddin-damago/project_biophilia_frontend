@@ -1,22 +1,34 @@
-import { useState, type SubmitEvent, type ChangeEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import { useNavigate } from "react-router";
 import { postUserData, type UserFormData } from "../api/userData";
 
+const initialFormState: UserFormData = {
+  q1: null,
+  q2: null,
+  q3: null,
+  q4: null,
+  q5: null,
+};
+
+type QuestionKey = "q1" | "q2" | "q3" | "q4" | "q5";
+
 export default function UserInput() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<UserFormData>({
-    age: "",
-    energy_level: "",
-  });
+  const [formData, setFormData] = useState<UserFormData>(initialFormState);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+  const handleRadioChange = (questionId: QuestionKey, questionText: string, scoreValue: number) => {
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      // We save the full metadata object into the specific question key
+      [questionId]: {
+        text: questionText,
+        score: scoreValue,
+      },
     }));
   };
+
+  const isFormInvalid = Object.values(formData).includes(null);
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,10 +36,6 @@ export default function UserInput() {
 
     console.log(formData);
 
-    if (!formData.age || !formData.energy_level) {
-      alert("Please fill out all fields");
-      return;
-    }
     try {
       const payload: UserFormData = formData;
       // 1. Call your API function
@@ -43,56 +51,46 @@ export default function UserInput() {
     }
   };
 
+  const questions: { id: QuestionKey; text: string }[] = [
+    { id: "q1", text: "I have felt cheerful and in good spirits" },
+    { id: "q2", text: "I have felt calm and relaxed" },
+    { id: "q3", text: "I have felt active and vigorous" },
+    { id: "q4", text: "I woke up feeling fresh and rested" },
+    { id: "q5", text: "My daily life has been filled with things that interest me" },
+  ];
+
   return (
     <div className="max-w-md p-6 my-4 mx-auto bg-slate-50 border rounded-xl shadow-xs border-stone-200">
       <h2 className="mb-4 font-nature-light font-bold text-2xl text-emerald-900">Biophilic Assessment</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="age" className="block text-sm font-medium text-stone-700 mb-1">
-            Age
-          </label>
-          <input
-            type="number"
-            id="age"
-            name="age"
-            min="1"
-            max="120"
-            value={formData.age}
-            onChange={handleChange}
-            placeholder="e.g., 28"
-            className="w-full px-3 py-2 border rounded-lg bg-stone-50 border-stone-300 text-stone-900 focus:outline-none
-              focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="energy_level" className="block text-sm font-medium text-stone-700 mb-1">
-            Current Mood
-          </label>
-          <select
-            id="energy_level"
-            name="energy_level"
-            value={formData.energy_level}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg bg-stone-50 border-stone-300 text-stone-900 focus:outline-none
-              focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
-          >
-            <option value="" disabled>
-              Select your energy level...
-            </option>
-            <option value="low">Low</option>
-            <option value="mid">Mid</option>
-            <option value="high">High</option>
-          </select>
-        </div>
+        {questions.map((q) => (
+          <div key={q.id} style={{ marginBottom: "20px" }}>
+            <p>
+              <strong>{q.text}</strong>
+            </p>
+            {[5, 4, 3, 2, 1, 0].map((score) => (
+              <label key={score} style={{ marginRight: "15px" }}>
+                <input
+                  type="radio"
+                  name={q.id}
+                  value={score}
+                  // Crucial step: checked is true ONLY if the state matches the score
+                  checked={formData[q.id]?.score === score}
+                  onChange={() => handleRadioChange(q.id, q.text, score)}
+                />{" "}
+                {score}
+              </label>
+            ))}
+          </div>
+        ))}
 
         <button
           type="submit"
           className={`w-full px-4 py-2 mt-4 text-white font-medium transition-colors rounded-lg
-            ${!formData.age || !formData.energy_level ? "bg-gray-300" : "bg-emerald-700"} focus:outline-none
-            focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2`}
-          disabled={!formData.age || !formData.energy_level}
+            ${isFormInvalid ? "bg-gray-300" : "bg-emerald-700"} focus:outline-none focus:ring-2 focus:ring-emerald-600
+            focus:ring-offset-2`}
+          disabled={isFormInvalid}
         >
           {loading ? "Calculating..." : "Get Advice"}
         </button>

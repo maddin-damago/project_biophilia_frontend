@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import WeatherWidget from "../components/WeatherWidget";
 import { getLatestUserMood, type UserFormData } from "../api/userData";
 
-import loadingSpinner from "../../public/loading.gif";
+import loadingSpinner from "../assets/loading.gif";
 
 export default function Results() {
   const [resultData, setResultData] = useState<UserFormData | null>(null);
@@ -29,7 +29,7 @@ export default function Results() {
 
   if (loading) {
     return (
-      <div className="w-1/3 p-6 rounded shadow max-w-md mx-auto text-center">
+      <div className="w-1/3 p-6 max-w-md mx-auto text-center">
         <p className="text-gray-600 font-medium">
           <img src={loadingSpinner} alt="loading..." className="w-10 m-auto" />
         </p>

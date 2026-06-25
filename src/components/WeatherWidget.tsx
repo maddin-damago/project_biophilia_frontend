@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getWeatherMoodIndex, type MoodIndexResponse } from "../api/weather";
-import loadingSpinner from "../../public/loading.gif";
+import loadingSpinner from "../assets/loading.gif";
 
 export default function WeatherWidget() {
   const [data, setData] = useState<MoodIndexResponse | null>(null);
