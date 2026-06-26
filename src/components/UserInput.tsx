@@ -20,7 +20,6 @@ export default function UserInput() {
   const handleRadioChange = (questionId: QuestionKey, questionText: string, scoreValue: number) => {
     setFormData((prev) => ({
       ...prev,
-      // We save the full metadata object into the specific question key
       [questionId]: {
         text: questionText,
         score: scoreValue,
@@ -60,9 +59,9 @@ export default function UserInput() {
   ];
 
   return (
-    <div className="max-w-2xl p-6 my-4 mx-auto bg-slate-50 border rounded-xl shadow-xs border-stone-200">
+    <div className="max-w-2xl p-12 my-4 mx-auto bg-slate-50 border rounded-xl shadow-xs border-stone-200">
       <div className="flex-row justify-center mx-auto max-w-lg">
-        <h2 className="mb-4 font-nature-light font-bold text-2xl text-emerald-900">Wie erging es Dir heute?</h2>
+        <h2 className="mb-6 font-nature-light font-bold text-2xl text-emerald-900">Wie erging es Dir heute?</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {questions.map((q, index) => (
@@ -71,7 +70,7 @@ export default function UserInput() {
                 <strong>{q.text}</strong>
               </p>
               <div className="flex items-center">
-                <strong className="font-normal text-sm mb-1 mr-8">Stimmt voll zu</strong>
+                <strong className="font-normal text-sm mr-8">Stimmt voll zu</strong>
                 <div>
                   {[5, 4, 3, 2, 1, 0].map((score) => (
                     <label key={score} className="mr-2">
