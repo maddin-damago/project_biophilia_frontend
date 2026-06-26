@@ -1,22 +1,33 @@
-import { useState, type SubmitEvent, type ChangeEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import { useNavigate } from "react-router";
 import { postUserData, type UserFormData } from "../api/userData";
 
+const initialFormState: UserFormData = {
+  q1: null,
+  q2: null,
+  q3: null,
+  q4: null,
+  q5: null,
+};
+
+type QuestionKey = "q1" | "q2" | "q3" | "q4" | "q5";
+
 export default function UserInput() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<UserFormData>({
-    age: "",
-    energy_level: "",
-  });
+  const [formData, setFormData] = useState<UserFormData>(initialFormState);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+  const handleRadioChange = (questionId: QuestionKey, questionText: string, scoreValue: number) => {
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [questionId]: {
+        text: questionText,
+        score: scoreValue,
+      },
     }));
   };
+
+  const isFormInvalid = Object.values(formData).includes(null);
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,10 +35,6 @@ export default function UserInput() {
 
     console.log(formData);
 
-    if (!formData.age || !formData.energy_level) {
-      alert("Please fill out all fields");
-      return;
-    }
     try {
       const payload: UserFormData = formData;
       // 1. Call your API function
@@ -43,60 +50,71 @@ export default function UserInput() {
     }
   };
 
+  const questions: { id: QuestionKey; text: string }[] = [
+    { id: "q1", text: "Ich habe mich fröhlich und gut gelaunt gefühlt" },
+    { id: "q2", text: "Ich habe mich ruhig und entspannt gefühlt" },
+    { id: "q3", text: "Ich habe mich aktiv und voller Energie gefühlt" },
+    { id: "q4", text: "Ich bin frisch und ausgeruht aufgewacht" },
+    { id: "q5", text: "Mein Alltag ist voller Dinge, die mich interessieren" },
+  ];
+
   return (
-    <div className="max-w-md p-6 my-4 mx-auto bg-slate-50 border rounded-xl shadow-xs border-stone-200">
-      <h2 className="mb-4 font-nature-light font-bold text-2xl text-emerald-900">Biophilic Assessment</h2>
+    <div className="max-w-2xl p-12 my-4 mx-auto bg-slate-50 border rounded-xl shadow-xs border-stone-200">
+      <div className="flex-row justify-center mx-auto max-w-lg">
+        <h2 className="mb-6 font-nature-light font-bold text-2xl text-emerald-900">Wie erging es Dir heute?</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="age" className="block text-sm font-medium text-stone-700 mb-1">
-            Age
-          </label>
-          <input
-            type="number"
-            id="age"
-            name="age"
-            min="1"
-            max="120"
-            value={formData.age}
-            onChange={handleChange}
-            placeholder="e.g., 28"
-            className="w-full px-3 py-2 border rounded-lg bg-stone-50 border-stone-300 text-stone-900 focus:outline-none
-              focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {questions.map((q, index) => (
+            <div key={q.id} className="mb-4">
+              <p className="mb-2">
+                <strong>{q.text}</strong>
+              </p>
+              <div className="flex items-center">
+                <strong className="font-normal text-sm mr-8">Stimmt voll zu</strong>
+                <div>
+                  {[5, 4, 3, 2, 1, 0].map((score) => (
+                    <label key={score} className="mr-2">
+                      <input
+                        type="radio"
+                        name={q.id}
+                        value={score}
+                        checked={formData[q.id]?.score === score}
+                        onChange={() => handleRadioChange(q.id, q.text, score)}
+                      />{" "}
+                      {score}
+                    </label>
+                  ))}
+                </div>
+                <strong className="font-normal text-sm ml-6">Stimmt gar nicht zu</strong>
+              </div>
+              {index !== questions.length - 1 && <hr className="mt-2" />}
+            </div>
+          ))}
 
-        <div>
-          <label htmlFor="energy_level" className="block text-sm font-medium text-stone-700 mb-1">
-            Current Mood
-          </label>
-          <select
-            id="energy_level"
-            name="energy_level"
-            value={formData.energy_level}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg bg-stone-50 border-stone-300 text-stone-900 focus:outline-none
-              focus:ring-2 focus:ring-emerald-600 focus:border-transparent"
+          <button
+            type="submit"
+            className={`w-full px-4 py-2 mt-4 text-white font-medium transition-colors rounded-lg
+              ${isFormInvalid ? "bg-gray-300" : "bg-emerald-700"} focus:outline-none focus:ring-2 focus:ring-emerald-600
+              focus:ring-offset-2`}
+            disabled={isFormInvalid}
           >
-            <option value="" disabled>
-              Select your energy level...
-            </option>
-            <option value="low">Low</option>
-            <option value="mid">Mid</option>
-            <option value="high">High</option>
-          </select>
-        </div>
-
-        <button
-          type="submit"
-          className={`w-full px-4 py-2 mt-4 text-white font-medium transition-colors rounded-lg
-            ${!formData.age || !formData.energy_level ? "bg-gray-300" : "bg-emerald-700"} focus:outline-none
-            focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2`}
-          disabled={!formData.age || !formData.energy_level}
-        >
-          {loading ? "Calculating..." : "Get Advice"}
-        </button>
-      </form>
+            {loading ? "Berechne..." : "Ratschlag holen"}
+          </button>
+          <div className="mt-1 max-w-lg mx-auto">
+            <div className="max-w-lg mt-2 italic text-md mx-auto leading-5">
+              <p>
+                <strong className="mr-2">Hinweis:</strong>Der abgefragte Score basiert auf "The World Health
+                Organization-Five Well-Being Index (WHO-5)".
+              </p>
+              <p>
+                {" "}
+                Diese App ist ein Portfolioprojekt und hat keinerlei Anspruch auf medizinisch/wissenschafftliche
+                Genauigkeit.
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

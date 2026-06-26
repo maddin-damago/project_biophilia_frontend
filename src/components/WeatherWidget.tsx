@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getWeatherMoodIndex, type MoodIndexResponse } from "../api/weather";
-import loadingSpinner from "../../public/loading.gif";
+import loadingSpinner from "../assets/loading.gif";
 
 export default function WeatherWidget() {
   const [data, setData] = useState<MoodIndexResponse | null>(null);
@@ -25,7 +25,9 @@ export default function WeatherWidget() {
       <b className="font-nature-light text-shadow-[0_1px_1px_rgba(0,0,0,0.4)] pb-2">
         <h3>BioPhiliaFlow Mood Score:</h3>
       </b>
-      <span className="italic">{data.biophilia_mood_index}</span>
+      <span className="italic">
+        {data.biophilia_mood_index ? data.biophilia_mood_index : "Nothing to see here yet!"}
+      </span>
     </div>
   );
 }
