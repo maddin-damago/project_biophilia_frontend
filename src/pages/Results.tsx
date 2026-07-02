@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import dataJSON from "../assets/recommendation.json";
 import loadingSpinner from "../assets/loading.gif";
+import { getRecommendation } from "../api/userData";
 
 export interface Recommendation_Structure {
   fall: string;
@@ -32,7 +32,8 @@ export default function Results() {
     async function fetchData() {
       try {
         setLoading(true);
-        setResultData(dataJSON);
+        const data = await getRecommendation();
+        setResultData(data);
       } catch (err) {
         console.error(err);
         setError("Could not retrieve your result data from the server.");

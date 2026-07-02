@@ -1,3 +1,5 @@
+import type { Recommendation_Structure } from "../pages/Results";
+
 // Define the structure of the data you expect back from the Python backend
 export type UserFormData = {
   q1: Record<string, string | number> | null;
@@ -16,6 +18,21 @@ export async function postUserData(userData: UserFormData): Promise<UserFormData
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch mood index: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export async function getRecommendation(): Promise<Recommendation_Structure> {
+  const response = await fetch(`${BASE_URL}/recommendation`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
   if (!response.ok) {
