@@ -1,44 +1,45 @@
 {
-  "fall": "HIGH_OUTDOOR",
-  "condition": "Ideale äußere und innere Bedingungen: Strahlender Sonnenschein trifft auf maximale Lebensenergie und emotionale Balance.",
-  "kraeuter_einleitung": "Als leiser Wegweiser zu deiner inneren Natur dürfen dich heute Gewöhnlicher Beifuß und Wiesen-Schafgarbe begleiten. Nimm dir einen Moment Zeit, um dich mit der lebendigen Kraft dieser Wildkräuter zu verbinden:",
+  "fall": "REDUCED_OUTDOOR",
+  "condition": "Draußen scheint die Sonne, doch das schöne Wetter passt so gar nicht zu deiner gedrückten Stimmung.",
+  "kraeuter_einleitung": "Als leiser Wegweiser zu deiner inneren Natur dürfen dich heute Vogel-Sternmiere und Gundermann begleiten. Nimm dir einen Moment Zeit, um dich mit der lebendigen Kraft dieser Wildkräuter zu verbinden:",
   "kraeuter_details": [
     {
-      "trivialName": "Gewöhnlicher Beifuß",
-      "botanischerName": "Artemisia vulgaris",
-      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/ArtemisiaVulgaris.jpg/500px-ArtemisiaVulgaris.jpg",
-      "familie": "Asteraceae/ Korbblütler",
-      "ernte": "ganzjährig auffindbar",
+      "trivialName": "Vogel-Sternmiere",
+      "botanischerName": "Stellaria media",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/StellariaMedia001.JPG/1280px-StellariaMedia001.JPG",
+      "familie": "Caryophyllaceae/ Nelkengewächse",
+      "ernte": "ganzjährig",
       "erkennungsmerkmale": [
-        "Gelbe Blüten",
-        "Staude",
-        "Dichte Rispe mit vielen, meist 3 - 4 mm langen Blütenkörbchen",
-        "gefiederte Blätter mit gesägten Abschnitten",
-        "silbrig-weiße Blattunterseite",
-        "aufrechter Wuchs",
-        "schwacher Geruch beim Zerreiben"
+        "niederliegende oder aufsteigende, auf einer Längslinie behaarte Stängel",
+        "kleine weiße Sternblüten",
+        "gegenständige Blätter, fiedernervig"
       ],
-      "verwechslungsgefahr": ["Beifuß-Ambrosie (Ambrosia artemisiifolia)", "Wermuth (Artemisia absinthium)"],
-      "vorkommen": "Als anspruchsloser Kulturfolger gedeiht er wild an Wegrändern, auf Schuttplätzen, Brachflächen, an Bahndämmen, Dämmen sowie auf nährstoffreichen Böden.",
-      "heilwirkung": "Traditionelle Ritualpflanze, lädt zur bewussten Naturwahrnehmung ein. Die Volksmedizin empfiehlt sie bei Magenbeschwerden. Der Name Artemisia leitet sich von Artemis, der griechischen Jagdgöttin ab."
+      "verwechslungsgefahr": ["Acker-Gauchheil (Anagallis arvensis)"],
+      "vorkommen": "Gärten, Äcker, Wege und Ufer. Auf sehr Nährstoffreichen Böden, auch im Schatten.",
+      "heilwirkung": "Symbolisiert Anpassungsfähigkeit und Resilienz. Entzündungshemmend, schleimlösend und wundheilend. Gilt wegen des hohen Nährstoffgehalts als heimisches Superfood."
     },
     {
-      "trivialName": "Wiesen-Schafgarbe",
-      "botanischerName": "Achillea millefolium",
-      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Achillea_clusiana.jpg/1280px-Achillea_clusiana.jpg",
-      "familie": "Asteraceae/ Korbblütler",
-      "ernte": "Blattrosetten oft ganzjährig sichtbar",
+      "trivialName": "Gundermann",
+      "botanischerName": "Glechoma hederacea",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Glechoma_hederacea_Bluszczyk_kurdybanek_2020-04-24_03.jpg/960px-Glechoma_hederacea_Bluszczyk_kurdybanek_2020-04-24_03.jpg",
+      "familie": "Lamiaceae/ Lippenblütler",
+      "ernte": "wintergrün",
       "erkennungsmerkmale": [
         "Staude",
-        "Körbchen mit weißen, manchmal rosa Zungenblüten",
-        "Blätter sind fiederspaltig mit sehr feinen Zipfeln",
-        "charakteristischer aromatischer Duft"
+        "lilafarbene Blüte mit flacher Oberlippe",
+        "Blätter gegenständig, nieren- bis herzförmig, Blattrand gekerbt",
+        "kriechender Wuchs",
+        "leicht minziger Geschmack"
       ],
-      "verwechslungsgefahr": ["Gefleckter Schierling (Conium maculatum)"],
-      "vorkommen": "Wächst wild auf fast allen Wiesen, Weiden, Halbtrockenrasen sowie an Weg- und Ackerrändern. Sie bevorzugt sonnige bis halbschattige, trockene und durchlässige Standorte",
-      "heilwirkung": "Fördert die Aufmerksamkeit für feine Naturdetails. Sie wirkt entzündungshemmend, krampflösend und antimikrobiell. In der Volksmedizin wird Schafgarbe als blutstillendes Mittel und zur Verminderung der Schweißbildung verwendet."
+      "verwechslungsgefahr": ["keine giftigen Doppelgänger"],
+      "vorkommen": "Wiesen, Weiden, Rasenflächen, Auenwälder, Waldränder, Hecken und Böschungen. Auf feucht bis nassen, nährstoffreichen Lehmböden.",
+      "heilwirkung": "Fördert langsame Naturerkundung. Seine Hauptwirkung ist entzündungshemmend, schleimlösend und wundheilend. Er wird traditionell bei Erkältungen, Bronchitis und Magen-Darm-Beschwerden sowie zur Unterstützung der Wundheilung eingesetzt."
     }
   ],
-  "aktivität": "Kräuterspaziergang mit Sammeln und Bestimmen",
-  "erklaerung": "Hohe Energie und günstige Wetterbedingungen unterstützen aktive Naturerfahrung."
+  "aktivität": [
+    "Geh hinaus an einen besonderen Platz in der Natur, der dir gefällt und an dem du dich wohlfühlst. Einen Ort, an dem du merkst: Hier kann ich mich entspannen. Setze dich nieder und atme zehnmal tief ein und aus.",
+    "Nutze die frisch gewonnene Energie, um dich auf den Weg zu machen, die beiden Wildkräuter exakt zu bestimmen und zu sammeln. Nimm dabei nur so viel mit, wie du wirklich verbrauchen wirst. Bereite dir heute einen besonderen Salat zu, den du mit den beiden Wildkräutern verfeinerst, und spüre ganz bewusst, wie die Nährstoffe deinem Körper neue Kraft geben.",
+    "Kleiner Tipp: Nimm ruhig etwas mehr von dem Gundermann mit. Dieser lässt sich hervorragend zu einem kleinen Nachtisch verarbeiten, indem du die Blättchen in geschmolzene Schokolade tunkst und fest werden lässt. Durch die feine, minzige Note des Gundermanns kreierst du dir so eine ganz besondere Delikatesse, und dazu lässt Schokolade bekanntlich noch Glücksgefühle frei."
+  ],
+  "erklaerung": "Wenn die Energie sinkt, regeneriert die vitaminreiche Vogelmiere sanft, während der ausdauernde Gundermann hilft, die restlichen Kräfte im Fluss zu halten, ohne zu überfordern."
 }
